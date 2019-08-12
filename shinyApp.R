@@ -6,6 +6,7 @@ library(ggplot2)
 library(stringr)
 library(wordcloud)
 library(tm)
+library(rsconnect)
 set.seed(1234)
 
 nyt_data<-read.csv("/var/host/media/removable/SD Card/NYTimes_Books_Dashboard/books_uniq_weeks.csv")
