@@ -1,15 +1,14 @@
 library(shiny)
-library(formattable)
+library(DT)
 library(dplyr)
-library(gtools)
+#library(gtools)
 library(ggplot2)
-library(stringr)
+#library(stringr)
 library(wordcloud)
 library(tm)
 library(rsconnect)
-set.seed(1234)
 
-nyt_data<-read.csv("NYT_Bestsellers.csv",stringsAsFactors = FALSE)
+nyt_data<-read.csv("data/NYT_Bestsellers.csv",stringsAsFactors = FALSE)
 
 ui<-fluidPage(
   h1("New York Times Bestsellers 2011-2018"),
@@ -48,7 +47,7 @@ ui<-fluidPage(
       tabsetPanel(
         tabPanel(
           "Data Table",
-          tableOutput("book_table")
+          dataTableOutput("book_table")
         ),
         tabPanel(
           "Average Book Price Over Time",

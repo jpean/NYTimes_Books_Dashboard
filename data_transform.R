@@ -1,8 +1,10 @@
 library(dplyr)
-nyt_data<-read.csv("/var/host/media/removable/SD Card/NYTimes_Books_Dashboard/books_uniq_weeks.csv")
+library(gtools)
+library(stringr)
 
+nyt_data<-read.csv("data/books_uniq_weeks.csv")
 for(i in 1:ncol(nyt_data)){
-  colnames(nyt_data)[i]<-gsub("_"," ",capwords(colnames(nyt_data)[i]))
+  colnames(nyt_data)[i]<-sub("_"," ",sub("_"," ",capwords(colnames(nyt_data)[i])))
 }
 
 prices<-round(runif(nrow(nyt_data),0,20),2)

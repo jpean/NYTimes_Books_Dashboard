@@ -5,8 +5,6 @@ account: jpean
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 1079945
-bundleId: 2310716
+bundleId: 2323103
 url: https://jpean.shinyapps.io/the_app/
-when: 1565579194.25482
-asMultiple: FALSE
-asStatic: FALSE
+when: 1565891169.99531

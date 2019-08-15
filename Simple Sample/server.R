@@ -1,15 +1,15 @@
 library(shiny)
-library(formattable)
+library(DT)
 library(dplyr)
-library(gtools)
+#library(gtools)
 library(ggplot2)
-library(stringr)
+#library(stringr)
 library(wordcloud)
 library(tm)
 library(rsconnect)
-source("data_transform.R")
-set.seed(1234)
 
+nyt_data<-read.csv("data/NYT_Bestsellers.csv")%>%
+  mutate(Date=as.Date(Date,format="%Y-%m-%d"))
 
 function(input,output){
   nyt<-reactive({
@@ -41,10 +41,10 @@ function(input,output){
     d <- data.frame(word = names(v),freq=v)
     d%>%filter(word!="the"&word!="and")
   })
-  output$book_table<-renderTable({
-    formattable(nyt()%>%
-                  mutate(Price=paste0("$",round(Price,2)))%>%
-                  select(Publisher,Author,Price,Title,`Age group`,`Weeks on list`))
+  output$book_table<-renderDataTable({
+    datatable(nyt()%>%
+      mutate(Price=paste0("$",round(Price,2)))%>%
+      select(Publisher,Author,Price,Title,AgeGroup,WeeksOnList))
   })
   output$line_graph<-renderPlot({
     nyt()%>%
@@ -57,6 +57,6 @@ function(input,output){
     wc<-cloudwords()
     wordcloud(words = wc$word, freq = wc$freq, min.freq = 1,
               max.words=200, random.order=FALSE, rot.per=0.35, 
-              colors=brewer.pal(10, "Dark2"))
+              colors=brewer.pal(8, "Dark2"))
   })
 }
